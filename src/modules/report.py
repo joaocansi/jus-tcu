@@ -3,13 +3,10 @@ import docx2txt
 import os
 import re
 import fitz
-from  threading import Thread
 
 from utils.file import save_file
-from config.file import path
-
+from config.constants import download_path
 from modules.judgment import Judgment
-
 
 class Report:
     def __init__(self, report, release_date, url):
@@ -22,7 +19,7 @@ class Report:
         self._download()
         self._push_content()
         self._populate_judgments()
-        
+    
     def _download(self):
         pdf_response = requests.get(self.url)
         docx_response = requests.get(self.url.replace('&amp;', '&'))    
@@ -32,9 +29,9 @@ class Report:
         
         filename = 'BJ-' + str(self.report)
         
-        save_file(docx_response.content, path, filename, 'docx')
-        save_file(pdf_response.content, path, filename, 'pdf')
-        
+        save_file(docx_response.content, download_path, filename, 'docx')
+        save_file(pdf_response.content, download_path, filename, 'pdf')
+    
     def _push_content(self):
         texts = self._get_text()
         links = self._get_links()
@@ -66,14 +63,14 @@ class Report:
     def _get_text(self):
         pattern = r'(?<!.)(?:Acórdão) (?:(\d{1,5})\/(\d{4}))(.*?)(?=\n)\n\n(.*)\n\n(.*?)(?=\n)'
         
-        content = docx2txt.process(os.path.join(path, 'BJ-' + str(self.report) + '.docx'))
+        content = docx2txt.process(os.path.join(download_path, 'BJ-' + str(self.report) + '.docx'))
         content = re.findall(pattern, content)
         
         return content
     
     def _get_links(self):
         links = []
-        pdf_document = fitz.open(os.path.join(path, 'BJ-' + str(self.report) + '.pdf'))
+        pdf_document = fitz.open(os.path.join(download_path, 'BJ-' + str(self.report) + '.pdf'))
 
         for page_number in range(pdf_document.page_count):
             page = pdf_document.load_page(page_number)

@@ -1,12 +1,8 @@
-from openpyxl import Workbook
-from openpyxl.styles import Alignment
-
-from config.spreadsheet import columns, columns_settings
-from openpyxl.styles import Font, Alignment
+from config.constants import columns, columns_settings, output_path
 
 from openpyxl.cell.rich_text import CellRichText, TextBlock
 from openpyxl.cell.text import InlineFont
-
+from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 
 bold = InlineFont(b=True)
@@ -25,7 +21,7 @@ class Spreadsheet:
                 self.worksheet.append(self._get_worksheet_judgment(report, judgment))
                 
         self._setup()
-        self.workbook.save('file.xlsx')
+        self.workbook.save(output_path + '/boletins.xlsx')
         return
     
     def _setup(self):

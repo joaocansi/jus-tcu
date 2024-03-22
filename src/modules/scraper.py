@@ -2,10 +2,9 @@ import math
 import re
 import time
 
-from modules.web import driver, wait
+from config.constants import driver, wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-
 from modules.report import Report
 
 reports_per_page = 50
@@ -16,20 +15,19 @@ class WebScraper:
         self.range = range
         self.page = 1
         self.reports = []
-        
+
     def start(self):
-        driver.get(reports_url)
+        driver.get(reports_url) 
         self.reports_length = int(wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'lum-pagination-total-count'))).text)
         self._scrape()
         self._populate_reports()
         
     def _scrape(self):
-        if self.page > math.ceil(self.reports_length / 50):
+        if self.page > math.ceil(self.reports_length / reports_per_page):
             return
         
         table = wait.until(EC.visibility_of_element_located((By.ID, 'tabelapautas')))
         rows = table.find_elements(By.TAG_NAME, 'tr')[1:]
-        
                 
         for row in rows:
             cells = row.find_elements(By.TAG_NAME, 'td')            

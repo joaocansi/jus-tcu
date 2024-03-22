@@ -1,26 +1,7 @@
-from modules.web import driver, wait
+from config.constants import driver, wait
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-# import threading
-
-
-# threadLocal = threading.local()
-
-# def get_driver():
-#   driver = getattr(threadLocal, 'driver', None)
-#   wait = getattr(threadLocal, 'wait', None)
-  
-#   if driver is None:
-#     chromeOptions = ChromeOptions()
-#     chromeOptions.add_argument("--headless")
-#     driver = Chrome(chrome_options=chromeOptions)
-    
-#     setattr(threadLocal, 'driver', driver)
-#     setattr(threadLocal, 'wait', wait)
-    
-#   return driver, wait
 
 class Judgment:
     def __init__(self, type, judgment, year, header, body, url):
