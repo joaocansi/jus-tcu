@@ -1,6 +1,4 @@
-﻿# JUS-TCU
-
-<p align="center">
+﻿<p align="center">
   <img width="300px" src="./.github/tcu-logo-tribunal-de-contas-da-uniao.png" href="TCU" />
 </p>
 
