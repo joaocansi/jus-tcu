@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <img width="400px" src="./.github/tcu-logo-tribunal-de-contas-da-uniao.png" href="TCU" />
+  <img width="350px" src="./.github/tcu-logo-tribunal-de-contas-da-uniao.png" href="TCU" />
 </p>
 
 JUS-TCU is a web-scraping project designed to retrieve data from the Brazilian Federal Court of Accounts. It accesses the website, downloads reports within a specified range chosen by the user, and utilizes regular expressions to extract decisions (known as acórdãos) from PDF files, saving them into an Excel file. These reports, posted weekly, hold significant importance for the Federal Court of Accounts and related entities.
